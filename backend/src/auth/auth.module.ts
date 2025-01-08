@@ -13,8 +13,8 @@ import { JwtModule } from '@nestjs/jwt';
     PassportModule,
     JwtModule.register({
       secret:
-        'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTczNjMyOTE2NywiaWF0IjoxNzM2MzI5MTY3fQ.t-TrnnHfOrpV58GFzexVBSu7dg3cAbv7Z2Z6KnfshQ0', // This should be a secure key, keep it in .env for security
-      signOptions: { expiresIn: '60m' }, // Adjust expiration time as needed
+        'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTczNjMyOTE2NywiaWF0IjoxNzM2MzI5MTY3fQ.t-TrnnHfOrpV58GFzexVBSu7dg3cAbv7Z2Z6KnfshQ0',
+      signOptions: { expiresIn: '60m' },
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],

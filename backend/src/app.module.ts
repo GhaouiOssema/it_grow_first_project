@@ -10,12 +10,12 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // Ensure ConfigModule is global
-      envFilePath: '.env', // Specify .env file path
+      isGlobal: true,
+      envFilePath: '.env',
     }),
     MongooseModule.forRoot(
       'mongodb+srv://oghawi220:TnoasdnPigaXyP8X@cluster0.wi6bhd8.mongodb.net/nest',
-    ), // Use DATABASE_URI environment variable
+    ),
     ItemsModule,
     AuthModule,
     UsersModule,

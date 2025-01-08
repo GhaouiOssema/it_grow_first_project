@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './schemas/user.schema';
@@ -23,9 +23,20 @@ export class UsersService {
 
   async validate(email: string, password: string): Promise<User | null> {
     const user = await this.findByEmail(email);
-    if (user && (await bcrypt.compare(password, user.password))) {
-      return user; // Valid credentials, return user
+
+    if (!user) {
+      throw new UnauthorizedException('Email does not exist');
     }
-    return null; // Invalid credentials
+
+    const verifyPassword = await bcrypt.compare(password, user.password);
+
+    if (!verifyPassword) {
+      throw new UnauthorizedException('Incorrect password');
+    }
+
+    if (user && verifyPassword) {
+      return user;
+    }
+    return null;
   }
 }
