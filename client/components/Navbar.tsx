@@ -35,9 +35,9 @@ const Navbar = () => {
 
     return (
         <header className="fixed top-0 z-50 w-screen bg-white">
-            <div className="container flex h-20 items-center justify-between sticky">
+            <div className="container h-20 flex items-center justify-between">
+                <Sidebar activeSection={activeSection} />
                 <div className="flex items-center">
-                    <Sidebar activeSection={activeSection} />
                     <Link
                         href="/"
                         className="flex items-center space-x-2 ml-2 md:ml-0">
