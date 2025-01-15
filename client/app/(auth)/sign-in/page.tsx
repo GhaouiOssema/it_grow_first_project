@@ -1,26 +1,77 @@
 "use client";
 
+import { useState } from "react";
+import axios from "axios";
 import Link from "next/link";
 import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [rememberMe, setRememberMe] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
+
+    const handleLogin = async (): Promise<void> => {
+        setIsLoading(true);
+        setError(null);
+
+        if (!email || !password) {
+            setError("Please fill in all fields.");
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+                {
+                    email,
+                    password,
+                    rememberMe,
+                }
+            );
+
+            localStorage.setItem("token", response.data.access_token);
+
+            router.push("/profile");
+        } catch (err) {
+            const message =
+                axios.isAxiosError(err) && err.response?.data?.message
+                    ? err.response.data.message
+                    : "An error occurred during login.";
+            setError(message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
-        <div className="container flex h-[80vh] items-center justify-center">
-            <div className="mx-auto w-full max-w-md space-y-6">
+        <section className="mt-9 flex flex-col h-full w-full items-center justify-center">
+            <div className="container mx-auto w-full max-w-lg space-y-6">
                 <div className="space-y-2 text-center">
                     <h1 className="text-2xl font-bold">Log in</h1>
                 </div>
                 <div className="space-y-4">
+                    {error && (
+                        <div className="text-sm text-red-500 text-center">
+                            {error}
+                        </div>
+                    )}
                     <div className="space-y-2">
                         <Label htmlFor="email">Email address :</Label>
                         <Input
                             id="email"
                             placeholder="Email address"
                             type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     <div className="space-y-2">
@@ -30,25 +81,38 @@ export default function SignInPage() {
                                 id="password"
                                 placeholder="Password"
                                 type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                             <Eye className="absolute right-3 top-3 h-5 w-5 text-gray-400" />
                         </div>
                     </div>
+                    <div className="space-y-2 flex justify-end">
+                        <Link
+                            href="/forgot-password"
+                            className="text-sm text-brand-gray hover:text-brand-color underline">
+                            Forgot your password?
+                        </Link>
+                    </div>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                            <Checkbox id="remember" />
+                            <Checkbox
+                                id="remember"
+                                checked={rememberMe}
+                                onCheckedChange={(checked) =>
+                                    setRememberMe(checked as boolean)
+                                }
+                            />
                             <label htmlFor="remember" className="text-sm">
                                 Save my info
                             </label>
                         </div>
-                        <Link
-                            href="/forgot-password"
-                            className="text-sm text-[#6C3BF4] hover:underline">
-                            Forgot your password?
-                        </Link>
                     </div>
-                    <Button className="w-full bg-[#6C3BF4] hover:bg-[#5B32D6]">
-                        Log in
+                    <Button
+                        className="w-full bg-[#6138BD] hover:bg-[#5B32D6]"
+                        onClick={handleLogin}
+                        disabled={isLoading}>
+                        {isLoading ? "Logging in..." : "Log in"}
                     </Button>
                     <Button variant="outline" className="w-full">
                         <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -72,15 +136,17 @@ export default function SignInPage() {
                         Log in with Google
                     </Button>
                     <div className="text-center text-sm">
-                        Don&apos;t have an account?{" "}
+                        <span className="text-brand-gray">
+                            Don&apos;t have an account?{" "}
+                        </span>
                         <Link
                             href="/sign-up"
-                            className="text-[#6C3BF4] hover:underline">
+                            className="text-brand-color underline hover:underline">
                             Sign up
                         </Link>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

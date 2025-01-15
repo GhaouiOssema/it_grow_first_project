@@ -6,9 +6,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('register') // This should match the route in Postman
+  @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {
     const { email, password, username } = createUserDto;
-    return this.usersService.create({ email, password, username }); // Pass an object with email and password
+    return this.usersService.create({ email, password, username });
   }
 }

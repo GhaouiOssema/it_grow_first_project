@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 
 export default function SignUpPage() {
     return (
-        <div className="container flex h-[80vh] items-center justify-center">
+        <section className="mt-9 flex flex-col h-full w-full items-center justify-center">
             <div className="mx-auto w-full max-w-md space-y-6">
                 <div className="space-y-2 text-center">
                     <h1 className="text-2xl font-bold">Sign up</h1>
@@ -69,15 +69,17 @@ export default function SignUpPage() {
                         Sign up with Google
                     </Button>
                     <div className="text-center text-sm">
-                        Already have an account?{" "}
+                        <span className="text-brand-gray">
+                            Already have an account?{" "}
+                        </span>
                         <Link
                             href="/sign-in"
-                            className="text-[#6C3BF4] hover:underline">
+                            className="text-brand-color underline hover:underlinee">
                             Log in
                         </Link>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

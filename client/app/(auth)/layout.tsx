@@ -2,8 +2,8 @@ import Footer from "@/components/Footer";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="flex flex-col h-full boor">
-            <main className="flex-1">{children}</main>
+        <div className="flex flex-col h-screen w-full">
+            <main className="flex- h-full">{children}</main>
             <Footer />
         </div>
     );
