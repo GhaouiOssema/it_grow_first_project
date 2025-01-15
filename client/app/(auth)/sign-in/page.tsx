@@ -41,6 +41,7 @@ export default function SignInPage() {
             localStorage.setItem("token", response.data.access_token);
 
             router.push("/profile");
+            window.location.reload();
         } catch (err) {
             const message =
                 axios.isAxiosError(err) && err.response?.data?.message

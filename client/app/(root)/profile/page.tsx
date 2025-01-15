@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import { Token } from "@/app/types";
+import { Token } from "@/types";
 
 export default function ProfilePage() {
     const [email, setEmail] = useState<string | null>(null);

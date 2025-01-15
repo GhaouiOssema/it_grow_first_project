@@ -10,7 +10,7 @@ export class User extends Document {
   email: string;
 
   @Prop({ required: true })
-  password: string;
+  password: string; // Will be hashed
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -1,23 +1,110 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import {
+    DialogHeader,
+    DialogContent,
+    Dialog,
+    DialogTitle,
+    DialogDescription,
+} from "@/components/ui/dialog";
+import { userData } from "@/types";
 
 export default function SignUpPage() {
+    const [formData, setFormData] = useState<userData>({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [showPopup, setShowPopup] = useState<boolean>(false);
+    const router = useRouter();
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [id]: value,
+        }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+
+        // Simple validation
+        if (formData.password !== formData.confirmPassword) {
+            setError("Passwords do not match");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const res = await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/users/register`,
+                {
+                    username: formData.username,
+                    email: formData.email,
+                    password: formData.password,
+                }
+            );
+
+            if (res.status === 201) {
+                setShowPopup(true);
+
+                setFormData({
+                    username: "",
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                });
+
+                setTimeout(() => {
+                    router.push("/sign-in");
+                }, 3000);
+            }
+        } catch (err) {
+            setError("Registration failed. Please try again.");
+            console.log(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <section className="mt-9 flex flex-col h-full w-full items-center justify-center">
-            <div className="mx-auto w-full max-w-md space-y-6">
+            <div className="container mx-auto w-full max-w-md space-y-6">
                 <div className="space-y-2 text-center">
                     <h1 className="text-2xl font-bold">Sign up</h1>
                 </div>
                 <div className="space-y-4">
                     <div className="space-y-2">
+                        <Label htmlFor="username">User name :</Label>
+                        <Input
+                            id="username"
+                            value={formData.username}
+                            onChange={handleInputChange}
+                            placeholder="User name"
+                            type="text"
+                        />
+                    </div>
+                    <div className="space-y-2">
                         <Label htmlFor="email">Email address :</Label>
                         <Input
                             id="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
                             placeholder="Email address"
                             type="email"
                         />
@@ -27,6 +114,8 @@ export default function SignUpPage() {
                         <div className="relative">
                             <Input
                                 id="password"
+                                value={formData.password}
+                                onChange={handleInputChange}
                                 placeholder="Password"
                                 type="password"
                             />
@@ -34,18 +123,30 @@ export default function SignUpPage() {
                         </div>
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="confirm">Confirm password :</Label>
+                        <Label htmlFor="confirmPassword">
+                            Confirm password :
+                        </Label>
                         <div className="relative">
                             <Input
-                                id="confirm"
+                                id="confirmPassword"
+                                value={formData.confirmPassword}
+                                onChange={handleInputChange}
                                 placeholder="Confirm password"
                                 type="password"
                             />
                             <Eye className="absolute right-3 top-3 h-5 w-5 text-gray-400" />
                         </div>
                     </div>
-                    <Button className="w-full bg-[#6C3BF4] hover:bg-[#5B32D6]">
-                        Create account
+                    {error && (
+                        <div className="text-red-500 text-center">
+                            <p>{error}</p>
+                        </div>
+                    )}
+                    <Button
+                        className="w-full bg-brand-color hover:bg-[#5B32D6]"
+                        onClick={handleSubmit}
+                        disabled={loading}>
+                        {loading ? "Creating account..." : "Create account"}
                     </Button>
                     <Button variant="outline" className="w-full">
                         <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -80,6 +181,30 @@ export default function SignUpPage() {
                     </div>
                 </div>
             </div>
+
+            {/* Success Popup */}
+            {showPopup && (
+                <Dialog open={showPopup} onOpenChange={setShowPopup}>
+                    <DialogContent className="max-w-sm p-6 bg-white rounded-lg shadow-lg">
+                        <DialogHeader>
+                            <DialogTitle className="text-xl font-semibold text-center text-green-500">
+                                Registration Successful
+                            </DialogTitle>
+                            <DialogDescription className="text-center text-gray-600 mt-2">
+                                You have successfully registered! You will be
+                                redirected to the login page shortly.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="mt-6 text-center">
+                            <Button
+                                className="w-full bg-green-500 hover:bg-green-600 text-white"
+                                onClick={() => setShowPopup(false)}>
+                                Close
+                            </Button>
+                        </div>
+                    </DialogContent>
+                </Dialog>
+            )}
         </section>
     );
 }
