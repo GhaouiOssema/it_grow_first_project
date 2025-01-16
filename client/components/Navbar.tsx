@@ -26,6 +26,9 @@ const Navbar = () => {
             const decodedToken = jwtDecode<Token>(token);
             setUser(decodedToken);
             setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+            setUser(null);
         }
 
         const handleScroll = () => {
@@ -47,7 +50,7 @@ const Navbar = () => {
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [router]);
 
     const handleLogout = () => {
         localStorage.removeItem("token");

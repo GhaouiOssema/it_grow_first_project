@@ -39,4 +39,19 @@ export class UsersService {
     }
     return null;
   }
+
+  async findByGoogleId(googleId: string): Promise<User> {
+    return this.userModel.findOne({ where: { googleId } });
+  }
+
+  async createGoogleUser(profile: any): Promise<User> {
+    const newUser = new this.userModel({
+      googleId: profile.googleId,
+      email: profile.email,
+      username: profile.username,
+    });
+
+    // Save the instance of the model
+    return await newUser.save();
+  }
 }

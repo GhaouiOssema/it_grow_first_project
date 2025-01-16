@@ -3,12 +3,13 @@
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { Eye } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function SignInPage() {
     const [email, setEmail] = useState<string>("");
@@ -16,6 +17,7 @@ export default function SignInPage() {
     const [rememberMe, setRememberMe] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
     const router = useRouter();
 
     const handleLogin = async (): Promise<void> => {
@@ -41,7 +43,6 @@ export default function SignInPage() {
             localStorage.setItem("token", response.data.access_token);
 
             router.push("/profile");
-            window.location.reload();
         } catch (err) {
             const message =
                 axios.isAxiosError(err) && err.response?.data?.message
@@ -51,6 +52,10 @@ export default function SignInPage() {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleGoogleLogin = () => {
+        signIn("google");
     };
 
     return (
@@ -81,11 +86,22 @@ export default function SignInPage() {
                             <Input
                                 id="password"
                                 placeholder="Password"
-                                type="password"
+                                type={passwordVisible ? "text" : "password"} // Toggle input type based on state
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            <Eye className="absolute right-3 top-3 h-5 w-5 text-gray-400" />
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setPasswordVisible(!passwordVisible)
+                                } // Toggle visibility
+                                className="absolute right-3 top-3">
+                                {passwordVisible ? (
+                                    <EyeOff className="h-5 w-5 text-gray-400" />
+                                ) : (
+                                    <Eye className="h-5 w-5 text-gray-400" />
+                                )}
+                            </button>
                         </div>
                     </div>
                     <div className="space-y-2 flex justify-end">
@@ -115,7 +131,10 @@ export default function SignInPage() {
                         disabled={isLoading}>
                         {isLoading ? "Logging in..." : "Log in"}
                     </Button>
-                    <Button variant="outline" className="w-full">
+                    <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={handleGoogleLogin}>
                         <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                             <path
                                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"

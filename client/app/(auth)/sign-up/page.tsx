@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
+
 import {
     DialogHeader,
     DialogContent,
@@ -28,6 +29,9 @@ export default function SignUpPage() {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [showPopup, setShowPopup] = useState<boolean>(false);
+    const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+    const [confirmPasswordVisible, setConfirmPasswordVisible] =
+        useState<boolean>(false);
     const router = useRouter();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,6 +86,14 @@ export default function SignUpPage() {
         }
     };
 
+    const togglePasswordVisibility = () => {
+        setPasswordVisible((prev) => !prev);
+    };
+
+    const toggleConfirmPasswordVisibility = () => {
+        setConfirmPasswordVisible((prev) => !prev);
+    };
+
     return (
         <section className="flex flex-col h-full w-full items-center justify-center">
             <div className="mt-[5rem] container mx-auto w-full max-w-md space-y-4 ">
@@ -117,9 +129,19 @@ export default function SignUpPage() {
                                 value={formData.password}
                                 onChange={handleInputChange}
                                 placeholder="Password"
-                                type="password"
+                                type={passwordVisible ? "text" : "password"}
                             />
-                            <Eye className="absolute right-3 top-3 h-5 w-5 text-gray-400" />
+                            {passwordVisible ? (
+                                <EyeOff
+                                    className="absolute right-3 top-3 h-5 w-5 text-gray-400 cursor-pointer"
+                                    onClick={togglePasswordVisibility}
+                                />
+                            ) : (
+                                <Eye
+                                    className="absolute right-3 top-3 h-5 w-5 text-gray-400 cursor-pointer"
+                                    onClick={togglePasswordVisibility}
+                                />
+                            )}
                         </div>
                     </div>
                     <div className="space-y-2">
@@ -132,9 +154,21 @@ export default function SignUpPage() {
                                 value={formData.confirmPassword}
                                 onChange={handleInputChange}
                                 placeholder="Confirm password"
-                                type="password"
+                                type={
+                                    confirmPasswordVisible ? "text" : "password"
+                                }
                             />
-                            <Eye className="absolute right-3 top-3 h-5 w-5 text-gray-400" />
+                            {confirmPasswordVisible ? (
+                                <EyeOff
+                                    className="absolute right-3 top-3 h-5 w-5 text-gray-400 cursor-pointer"
+                                    onClick={toggleConfirmPasswordVisibility}
+                                />
+                            ) : (
+                                <Eye
+                                    className="absolute right-3 top-3 h-5 w-5 text-gray-400 cursor-pointer"
+                                    onClick={toggleConfirmPasswordVisibility}
+                                />
+                            )}
                         </div>
                     </div>
                     {error && (

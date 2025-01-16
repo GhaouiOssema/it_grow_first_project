@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Token } from "@/types";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 
 export default function ProfilePage() {
     const [email, setEmail] = useState<string | null>(null);
@@ -19,6 +20,8 @@ export default function ProfilePage() {
             }
         }
     }, []);
+
+    useProtectedRoute();
 
     return (
         <section className="flex flex-col items-center justify-center space-y-4 mt-9">
