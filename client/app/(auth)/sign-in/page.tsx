@@ -54,7 +54,7 @@ export default function SignInPage() {
     };
 
     return (
-        <section className="mt-9 flex flex-col h-full w-full items-center justify-center">
+        <section className="mt-20 flex flex-col h-full w-full items-center justify-center">
             <div className="container mx-auto w-full max-w-lg space-y-6">
                 <div className="space-y-2 text-center">
                     <h1 className="text-2xl font-bold">Log in</h1>
@@ -110,7 +110,7 @@ export default function SignInPage() {
                         </div>
                     </div>
                     <Button
-                        className="w-full bg-[#6138BD] hover:bg-[#5B32D6]"
+                        className="w-full bg-brand-color hover:bg-[#5B32D6]"
                         onClick={handleLogin}
                         disabled={isLoading}>
                         {isLoading ? "Logging in..." : "Log in"}

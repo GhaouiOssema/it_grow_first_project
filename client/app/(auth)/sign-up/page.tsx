@@ -83,12 +83,12 @@ export default function SignUpPage() {
     };
 
     return (
-        <section className="mt-9 flex flex-col h-full w-full items-center justify-center">
-            <div className="container mx-auto w-full max-w-md space-y-6">
+        <section className="flex flex-col h-full w-full items-center justify-center">
+            <div className="mt-[5rem] container mx-auto w-full max-w-md space-y-4 ">
                 <div className="space-y-2 text-center">
                     <h1 className="text-2xl font-bold">Sign up</h1>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-2">
                     <div className="space-y-2">
                         <Label htmlFor="username">User name :</Label>
                         <Input

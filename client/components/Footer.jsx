@@ -3,21 +3,21 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <footer className="border-t bg-[#1B224B] py-6 text-white">
-            <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
-                <p className="text-center text-sm leading-loose md:text-left">
+        <footer className="w-full">
+            <div className="container mx-auto px-4 flex flex-col gap-4 md:gap-0 sm:flex-row items-center justify-between my-20">
+                <p className="text-sm text-white/90">
                     Copyright © Modak {new Date().getFullYear()}. All rights
                     reserved.
                 </p>
-                <nav className="flex gap-4 sm:gap-6">
+                <nav className="flex gap-6">
                     <Link
                         href="/privacy-policy"
-                        className="text-sm hover:underline">
+                        className="text-sm text-white/90 hover:text-white hover:underline transition-colors">
                         Privacy Policy
                     </Link>
                     <Link
                         href="/terms-of-use"
-                        className="text-sm hover:underline">
+                        className="text-sm text-white/90 hover:text-white hover:underline transition-colors">
                         Terms of Use
                     </Link>
                 </nav>
