@@ -16,7 +16,7 @@ export default function ForgotPasswordPage() {
         setMessage("");
         try {
             const response = await axios.post<{ exists: boolean }>(
-                "/api/forgot-password",
+                `${process.env.NEXT_PUBLIC_API_URL}/account/forgot-password`,
                 { email }
             );
             setMessage(
@@ -32,7 +32,7 @@ export default function ForgotPasswordPage() {
     };
 
     return (
-        <section className="flex h-screen w-screen items-center justify-center">
+        <section className="flex w-screen items-center justify-center">
             <div className="container mx-auto w-full max-w-md space-y-6">
                 <div className="space-y-2 text-center">
                     <h1 className="text-2xl font-bold">Forgot Password</h1>

@@ -2,7 +2,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './schemas/user.schema';
-import * as bcrypt from 'bcrypt'; // or 'bcryptjs'
+import * as bcrypt from 'bcrypt';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class UsersService {
@@ -51,7 +52,20 @@ export class UsersService {
       username: profile.username,
     });
 
-    // Save the instance of the model
     return await newUser.save();
+  }
+
+  generateResetToken(): string {
+    return crypto.randomBytes(32).toString('hex');
+  }
+
+  async updateResetToken(userId: string, token: string): Promise<void> {
+    const expirationDate = new Date();
+    expirationDate.setHours(expirationDate.getHours() + 1);
+
+    await this.userModel.findByIdAndUpdate(userId, {
+      resetToken: token,
+      resetExpires: expirationDate,
+    });
   }
 }

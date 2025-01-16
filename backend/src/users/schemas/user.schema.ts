@@ -10,7 +10,13 @@ export class User extends Document {
   email: string;
 
   @Prop({ required: true })
-  password: string; // Will be hashed
+  password: string;
+
+  @Prop({ default: null })
+  resetToken: string;
+
+  @Prop({ type: Date, default: null })
+  resetExpires: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
