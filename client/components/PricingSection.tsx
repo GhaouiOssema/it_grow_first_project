@@ -1,50 +1,100 @@
 import Image from "next/image";
-import React from "react";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { pricingPlans } from "@/constants";
 
-const PricingSection = () => {
+export default function PricingSection() {
     return (
-        <section className="bg-gray-50 py-12 md:py-24" id="pricing">
-            <div className="container">
-                <h2 className="mb-12 text-2xl font-bold text-center">
-                    Plans & Pricing
-                </h2>
-                <div className="grid gap-6 md:grid-cols-3">
+        <section className="w-full py-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto">
+                <div className="text-center mb-12">
+                    <h1 className="text-3xl sm:text-4xl font-bold text-[#11204D] font-playfair mb-3">
+                        Plans & Pricing
+                    </h1>
+                    <p className="text-[#11204D59] font-bold font-playfair">
+                        Tailored Packages to Elevate Your Vision
+                    </p>
+                </div>
+
+                <div className="grid gap-8 md:grid-cols-3 lg:gap-12">
                     {pricingPlans.map((plan, index) => (
-                        <Card
-                            key={index}
-                            className={`p-6 ${plan.cardClass || ""}`}>
-                            <div className="text-center">
-                                <div className="mb-4">
-                                    <Image
-                                        src={plan.imageSrc}
-                                        alt={plan.imageAlt}
-                                        width={40}
-                                        height={40}
-                                        className="mx-auto"
-                                    />
+                        <div key={index} className="px-5">
+                            <Card
+                                className={` relative overflow-hidden py-8 px-8 rounded-[10px] shadow-lg transition-transform hover:scale-105 ${
+                                    plan.cardClass || "bg-white"
+                                }`}>
+                                <div className="flex flex-col items-center text-center ">
+                                    <div className="mb-6">
+                                        <Image
+                                            src={
+                                                plan.imageSrc ||
+                                                "/placeholder.svg"
+                                            }
+                                            alt={plan.imageAlt}
+                                            width={48}
+                                            height={48}
+                                            className="w-auto h-12"
+                                        />
+                                    </div>
+
+                                    <h3
+                                        className={`text-xl font-semibold mb-4`}>
+                                        {plan.name}
+                                    </h3>
+
+                                    <div
+                                        className={`text-4xl font-medium mb-6 ${
+                                            plan.cardClass && "text-brand-color"
+                                        }`}>
+                                        <span className="text-2xl mr-2">$</span>
+                                        {plan.price}
+                                    </div>
+
+                                    <div className="mb-8">
+                                        <p className={`mb-2 font-medium`}>
+                                            Includes:
+                                        </p>
+                                        <ul
+                                            className={`space-y-3 divide-y divide-emerald-950`}>
+                                            {plan.description.map(
+                                                (feature, i) => (
+                                                    <li
+                                                        key={i}
+                                                        className="flex items-center justify-center">
+                                                        {i !== 2 && (
+                                                            <>
+                                                                <div className="h-0.5 w-0.5 rounded-full bg-black mr-3" />
+                                                                {feature}
+                                                            </>
+                                                        )}
+                                                        {i === 2 && (
+                                                            <span className="relative">
+                                                                <div className="h-0.5 w-0.5 rounded-full bg-black absolute top-2 left-4 md:left-7" />
+                                                                {feature}
+                                                            </span>
+                                                        )}
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <Button
+                                            className={`rounded-[10px] px-8 py-2 transition-colors
+                    ${
+                        !plan.cardClass
+                            ? "hover:bg-[#11204D]/80 bg-[#11204D] "
+                            : "hover:bg-[#6C3BF4]/90 bg-brand-color text-white"
+                    }`}>
+                                            Contact Me
+                                        </Button>
+                                    </div>
                                 </div>
-                                <h3 className="mb-2 font-bold">{plan.name}</h3>
-                                <p className="text-3xl font-bold">
-                                    {plan.price}
-                                </p>
-                                <ul className="my-4 space-y-2 text-sm text-gray-500">
-                                    {plan.description.map((item, index) => (
-                                        <li key={index}>{item}</li>
-                                    ))}
-                                </ul>
-                                <Button className={plan.buttonClass}>
-                                    Choose Plan
-                                </Button>
-                            </div>
-                        </Card>
+                            </Card>
+                        </div>
                     ))}
                 </div>
             </div>
         </section>
     );
-};
-
-export default PricingSection;
+}
