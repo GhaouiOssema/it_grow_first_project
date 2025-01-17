@@ -40,7 +40,6 @@ export const authOptions: NextAuthOptions = {
         async session({ session, token }) {
             if (token?.serverToken) {
                 session.accessToken = token.serverToken as string;
-                console.log("Access Token in session:", session.accessToken);
             }
             return session;
         },

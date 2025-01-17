@@ -29,7 +29,7 @@ export const pricingPlans = [
         ],
         imageAlt: "Gold",
         imageSrc: "/pricing/img-2.png",
-        cardClass: "bg-[#6138BD33]",
+        cardClass: true,
     },
     {
         name: "Platinum Package",

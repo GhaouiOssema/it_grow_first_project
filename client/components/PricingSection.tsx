@@ -16,12 +16,14 @@ export default function PricingSection() {
                     </p>
                 </div>
 
-                <div className="grid gap-8 md:grid-cols-3 lg:gap-12">
+                <div className="grid gap-8 md:gap-0 px-0 md:px-24 md:grid-cols-3">
                     {pricingPlans.map((plan, index) => (
                         <div key={index} className="px-5">
                             <Card
-                                className={` relative overflow-hidden py-8 px-8 rounded-[10px] shadow-lg transition-transform hover:scale-105 ${
-                                    plan.cardClass || "bg-white"
+                                className={`boor relative overflow-hidden py-8 px-8 rounded-[10px] shadow-lg transition-transform hover:scale-105 ${
+                                    plan.cardClass
+                                        ? " bg-[#6138bd]/20"
+                                        : "bg-white"
                                 }`}>
                                 <div className="flex flex-col items-center text-center ">
                                     <div className="mb-6">
@@ -36,12 +38,10 @@ export default function PricingSection() {
                                             className="w-auto h-12"
                                         />
                                     </div>
-
                                     <h3
                                         className={`text-xl font-semibold mb-4`}>
                                         {plan.name}
                                     </h3>
-
                                     <div
                                         className={`text-4xl font-medium mb-6 ${
                                             plan.cardClass && "text-brand-color"
@@ -49,13 +49,12 @@ export default function PricingSection() {
                                         <span className="text-2xl mr-2">$</span>
                                         {plan.price}
                                     </div>
-
                                     <div className="mb-8">
                                         <p className={`mb-2 font-medium`}>
                                             Includes:
                                         </p>
                                         <ul
-                                            className={`space-y-3 divide-y divide-emerald-950`}>
+                                            className={`space-y-3 divide-y divide-[#11204D59] text-[#11204DB2] `}>
                                             {plan.description.map(
                                                 (feature, i) => (
                                                     <li
@@ -63,13 +62,13 @@ export default function PricingSection() {
                                                         className="flex items-center justify-center">
                                                         {i !== 2 && (
                                                             <>
-                                                                <div className="h-0.5 w-0.5 rounded-full bg-black mr-3" />
+                                                                <div className="h-0.5 w-0.5 rounded-full bg-[#11204D59]/15 mr-3" />
                                                                 {feature}
                                                             </>
                                                         )}
                                                         {i === 2 && (
                                                             <span className="relative">
-                                                                <div className="h-0.5 w-0.5 rounded-full bg-black absolute top-2 left-4 md:left-7" />
+                                                                <div className="h-0.5 w-0.5 rounded-full bg-[#11204D59] absolute top-2 left-4 md:left-7" />
                                                                 {feature}
                                                             </span>
                                                         )}
