@@ -30,14 +30,14 @@ const BlogSection = () => {
     return (
         <section className="container py-16" id="blog">
             <div className="mb-16 text-center">
-                <h1 className="text-4xl font-bold text-[#1a237e] font-playfair mb-3">
+                <h1 className="text-4xl font-bold text-[#11204D] font-playfair mb-3">
                     From The Blog
                 </h1>
                 <p className="text-gray-500 font-medium">
                     Stories, Tips, and Inspiration
                 </p>
             </div>
-            <div className=" grid gap-8 md:grid-cols-3 items-center justify-center">
+            <div className=" grid gap-8 md:grid-cols-2 lg:grid-cols-3 items-center justify-center">
                 {posts.map((post, i) => (
                     <Card
                         key={i}
