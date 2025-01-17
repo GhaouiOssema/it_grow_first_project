@@ -33,7 +33,7 @@ const BlogSection = () => {
                 <h1 className="text-4xl font-bold text-[#11204D] font-playfair mb-3">
                     From The Blog
                 </h1>
-                <p className="text-gray-500 font-medium">
+                <p className="text-[#11204D59] font-bold font-playfair">
                     Stories, Tips, and Inspiration
                 </p>
             </div>
