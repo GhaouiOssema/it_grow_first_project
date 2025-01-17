@@ -32,3 +32,12 @@ export interface ContactFormData {
 export interface GoogleLoginResponse {
     credential: string;
 }
+
+export interface BlogPost {
+    title: string;
+    imageUrl: string;
+    category: string;
+    createdAt: string;
+    author: string;
+    slug: string;
+}

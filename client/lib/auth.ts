@@ -21,7 +21,6 @@ export const authOptions: NextAuthOptions = {
                     );
 
                     const data = response.data;
-                    console.log("Google login response data:", data);
 
                     if (data.exists) {
                         token.isAuthorized = true;

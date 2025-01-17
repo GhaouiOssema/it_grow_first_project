@@ -10,7 +10,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { join } from 'path';
 import { MailModule } from './mail/mail.module';
-import { MailController } from './mail/mail.controller';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { BlogModule } from './blog/blog.module';
 
 @Module({
   imports: [
@@ -42,7 +43,12 @@ import { MailController } from './mail/mail.controller';
         },
       },
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
+    }),
     MailModule,
+    BlogModule,
   ],
   controllers: [AppController, ForgotPasswordController],
   providers: [AppService],

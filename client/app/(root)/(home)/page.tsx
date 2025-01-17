@@ -13,17 +13,7 @@ export default function LandingPage() {
             {/* Hero Section */}
             <HeroSection />
 
-            {/* About Section */}
-            <AboutSection />
 
-            {/* Services Section */}
-            <ServicesSection />
-
-            {/* Portfolio Grid */}
-            <PortfolioGrid />
-
-            {/* Pricing Section */}
-            <PricingSection />
 
             {/* Blog Section */}
             <BlogSection />

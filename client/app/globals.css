@@ -38,7 +38,7 @@ html {
         --chart-4: 43 74% 66%;
         --chart-5: 27 87% 67%;
         --primary-color-brand: #6138bd;
-        --primary-color-brand-gray: #0000008F;
+        --primary-color-brand-gray: #0000008f;
     }
 
     .dark {
@@ -83,5 +83,5 @@ body {
 }
 
 .boor {
-    border: 1px solid white;
+    border: 1px solid black;
 }
