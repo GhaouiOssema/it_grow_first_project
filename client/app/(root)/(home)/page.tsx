@@ -6,6 +6,7 @@ import PricingSection from "@/components/PricingSection";
 import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import { ScrollUpButton } from "@/components/ScrollToTopButton";
+import Testimonial from "@/components/Testimonial";
 
 export default function LandingPage() {
     return (
@@ -21,6 +22,9 @@ export default function LandingPage() {
 
             {/* Portfolio Grid */}
             {/* <PortfolioGrid /> */}
+
+            {/* Testimonial */}
+            <Testimonial />
 
             {/* Pricing Section */}
             <PricingSection />

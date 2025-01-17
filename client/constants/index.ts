@@ -1,3 +1,5 @@
+import { Testimonial } from "@/types";
+
 export const navLinks = [
     { href: "/", label: "Home" },
     { href: "#about", label: "About" },
@@ -50,4 +52,14 @@ export const images = [
     "/car_image_3.jpg",
     "/car_image_4.jpg",
     "/car_image_5.jpg",
+];
+
+export const testimonials: Testimonial[] = [
+    {
+        id: 1,
+        name: "Hans Witherspoon",
+        avatar: "/images/avatar.jpg",
+        quote: "Extremely professional, unique and enjoyable. The effort taken to ensure adherence to our requirements ensured the optimum outcome.",
+        rating: 5,
+    },
 ];

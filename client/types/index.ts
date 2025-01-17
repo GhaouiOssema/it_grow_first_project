@@ -41,3 +41,16 @@ export interface BlogPost {
     author: string;
     slug: string;
 }
+
+export interface StarRatingProps {
+    rating: number;
+    maxRating?: number;
+}
+
+export interface Testimonial {
+    id: number;
+    name: string;
+    avatar: string;
+    quote: string;
+    rating: number;
+}
