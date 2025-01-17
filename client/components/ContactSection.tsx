@@ -61,10 +61,10 @@ const ContactSection = () => {
 
             if (res.status === 201) {
                 setIsError(false);
-              setPopupTitle("Message Sent Successfully");
-              setPopupDesc(
-                  "Thank you for reaching out! We have received your message and will get back to you shortly."
-              );
+                setPopupTitle("Message Sent Successfully");
+                setPopupDesc(
+                    "Thank you for reaching out! We have received your message and will get back to you shortly."
+                );
 
                 setShowPopup(true);
 
@@ -187,12 +187,12 @@ const ContactSection = () => {
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-3 ">
-                                <div className="h-1 w-1 rounded-full bg-white" />
-                                <p className="font-semibold text-nowrap text-xs">
-                                    Follow Me on
+                            <div className="flex items-center justify-between gap-3">
+                                <p className="font-semibold text-nowrap text-xs md:text-lg flex items-center gap-3">
+                                    <div className="h-1 w-1 rounded-full bg-white" />
+                                    <span>Follow Me on</span>
                                 </p>
-                                <div className="w-[80px] md:w-[100px] h-[2px] bg-white" />
+                                <div className="w-full h-[2px] bg-white" />
                                 <div className="flex gap-4">
                                     <Link
                                         href="#"
