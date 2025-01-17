@@ -22,6 +22,12 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={`${jost.variable} font-sans`}>
+            <head>
+                <meta
+                    httpEquiv="Cross-Origin-Opener-Policy"
+                    content="same-origin"
+                />
+            </head>
             <body>
                 <div className="flex flex-col min-h-screen">
                     <Navbar />

@@ -11,4 +11,10 @@ export class UsersController {
     const { email, password, username } = createUserDto;
     return this.usersService.create({ email, password, username });
   }
+
+  @Post('register/google')
+  async googleRegister(@Body() googleUserDto: CreateUserDto) {
+    const { email, username } = googleUserDto;
+    return this.usersService.createGoogleUser({ email, username });
+  }
 }

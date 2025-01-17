@@ -28,3 +28,7 @@ export interface ContactFormData {
     subject: string;
     message: string;
 }
+
+export interface GoogleLoginResponse {
+    credential: string;
+}

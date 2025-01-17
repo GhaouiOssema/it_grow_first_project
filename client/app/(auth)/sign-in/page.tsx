@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import CustomPopup from "@/components/CustomPopup";
 
 export default function SignInPage() {
@@ -61,8 +61,24 @@ export default function SignInPage() {
         }
     };
 
-    const handleGoogleLogin = () => {
-        signIn("google");
+    const handleGoogleLogin = async () => {
+        const result = await signIn("google", {
+            callbackUrl: "http://localhost:3000/profile",
+        });
+
+        if (result?.url) {
+            const session = await getSession();
+            console.log("Session data after Google login:", session); 
+
+            if (session && session.accessToken) {
+                localStorage.setItem("token", session.accessToken);
+                router.push(result.url);
+            } else {
+                setError("Failed to retrieve access token from Google.");
+                setIsError(true);
+                setShowPopup(true);
+            }
+        }
     };
 
     return (

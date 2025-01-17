@@ -46,6 +46,13 @@ export class UsersService {
   }
 
   async createGoogleUser(profile: any): Promise<User> {
+    const existingUser = await this.userModel.findOne({
+      email: profile.email,
+    });
+    if (existingUser) {
+      return existingUser;
+    }
+
     const newUser = new this.userModel({
       googleId: profile.googleId,
       email: profile.email,

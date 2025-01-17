@@ -14,7 +14,7 @@ export default function ProfilePage() {
         if (token) {
             try {
                 const decoded = jwtDecode<Token>(token);
-                setEmail(decoded.email); // Set the decoded email
+                setEmail(decoded.email);
             } catch (error) {
                 console.error("Failed to decode token", error);
             }

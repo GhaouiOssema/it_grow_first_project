@@ -11,6 +11,8 @@ import { Eye, EyeOff } from "lucide-react";
 
 import { userData } from "@/types";
 import CustomPopup from "@/components/CustomPopup";
+import { jwtDecode } from "jwt-decode";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 
 export default function SignUpPage() {
     const [formData, setFormData] = useState<userData>({
@@ -100,6 +102,41 @@ export default function SignUpPage() {
         setConfirmPasswordVisible((prev) => !prev);
     };
 
+    const handleGoogleSuccess = async (
+        credentialResponse: CredentialResponse
+    ) => {
+        if (credentialResponse.credential) {
+            const decodedData: { email: string; name: string } = jwtDecode(
+                credentialResponse.credential
+            );
+
+            const googleData = {
+                username: decodedData.name,
+                email: decodedData.email,
+            };
+
+            try {
+                const res = await axios.post(
+                    `${process.env.NEXT_PUBLIC_API_URL}/users/register/google`,
+                    googleData
+                );
+
+                if (res.status === 201) {
+                    // Handle success (e.g., redirect or show success popup)
+                }
+            } catch (err) {
+                console.error("Google Registration Failed", err);
+                // Handle error
+            }
+        } else {
+            console.error("Google login failed: No credential found");
+        }
+    };
+
+    const handleGoogleError = () => {
+        console.log("Google login failed");
+    };
+
     return (
         <section className="flex flex-col h-full w-full items-center justify-center">
             <div className="mt-[5rem] container mx-auto w-full max-w-md space-y-4 ">
@@ -183,7 +220,7 @@ export default function SignUpPage() {
                         disabled={loading}>
                         {loading ? "Creating account..." : "Create account"}
                     </Button>
-                    <Button variant="outline" className="w-full">
+                    {/* <Button variant="outline" className="w-full">
                         <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                             <path
                                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -203,7 +240,13 @@ export default function SignUpPage() {
                             />
                         </svg>
                         Sign up with Google
-                    </Button>
+                    </Button> */}
+
+                    <GoogleLogin
+                        onSuccess={handleGoogleSuccess}
+                        onError={handleGoogleError}
+                    />
+
                     <div className="text-center text-sm">
                         <span className="text-brand-gray">
                             Already have an account?{" "}
