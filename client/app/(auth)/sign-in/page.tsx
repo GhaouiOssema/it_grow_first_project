@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import CustomPopup from "@/components/CustomPopup";
 
 export default function SignInPage() {
     const [email, setEmail] = useState<string>("");
@@ -18,6 +19,8 @@ export default function SignInPage() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+    const [showPopup, setShowPopup] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
     const router = useRouter();
 
     const handleLogin = async (): Promise<void> => {
@@ -26,6 +29,8 @@ export default function SignInPage() {
 
         if (!email || !password) {
             setError("Please fill in all fields.");
+            setIsError(true);
+            setShowPopup(true);
             setIsLoading(false);
             return;
         }
@@ -49,6 +54,8 @@ export default function SignInPage() {
                     ? err.response.data.message
                     : "An error occurred during login.";
             setError(message);
+            setIsError(true);
+            setShowPopup(true);
         } finally {
             setIsLoading(false);
         }
@@ -65,11 +72,6 @@ export default function SignInPage() {
                     <h1 className="text-2xl font-bold">Log in</h1>
                 </div>
                 <div className="space-y-4">
-                    {error && (
-                        <div className="text-sm text-red-500 text-center">
-                            {error}
-                        </div>
-                    )}
                     <div className="space-y-2">
                         <Label htmlFor="email">Email address :</Label>
                         <Input
@@ -86,7 +88,7 @@ export default function SignInPage() {
                             <Input
                                 id="password"
                                 placeholder="Password"
-                                type={passwordVisible ? "text" : "password"} // Toggle input type based on state
+                                type={passwordVisible ? "text" : "password"}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
@@ -94,7 +96,7 @@ export default function SignInPage() {
                                 type="button"
                                 onClick={() =>
                                     setPasswordVisible(!passwordVisible)
-                                } // Toggle visibility
+                                }
                                 className="absolute right-3 top-3">
                                 {passwordVisible ? (
                                     <EyeOff className="h-5 w-5 text-gray-400" />
@@ -167,6 +169,17 @@ export default function SignInPage() {
                     </div>
                 </div>
             </div>
+
+            {showPopup && (
+                <CustomPopup
+                    setShowPopup={setShowPopup}
+                    showPopup={showPopup}
+                    title={isError ? "Error" : "Login Success"}
+                    desc={error || "Successfully logged in!"}
+                    setState={setShowPopup}
+                    isError={isError}
+                />
+            )}
         </section>
     );
 }

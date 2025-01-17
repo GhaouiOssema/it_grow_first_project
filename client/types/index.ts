@@ -12,3 +12,19 @@ export interface userData {
     password: string;
     confirmPassword: string;
 }
+
+export interface CustomPopupProps {
+    showPopup: boolean;
+    setShowPopup: (open: boolean) => void;
+    title: string;
+    desc: string;
+    setState: (state: boolean) => void;
+    isError: boolean;
+}
+
+export interface ContactFormData {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+}

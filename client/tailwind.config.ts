@@ -20,6 +20,7 @@ module.exports = {
                 "dm-sans": ["var(--font-dm-sans)"],
                 syne: ["var(--font-syne)"],
                 jost: ["Jost", "sans-serif"],
+                playfair: ['"Playfair Display"', "serif"],
             },
             colors: {
                 border: "hsl(var(--border))",

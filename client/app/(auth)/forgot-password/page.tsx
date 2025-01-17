@@ -5,15 +5,28 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import CustomPopup from "@/components/CustomPopup";
 
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
+    const [showPopup, setShowPopup] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
 
-    const handleForgotPassword = async () => {
+    const handleForgotPassword = async (e: React.FormEvent) => {
+        e.preventDefault();
         setIsLoading(true);
         setMessage("");
+        setIsError(false);
+        const isValidEmail = /\S+@\S+\.\S+/.test(email);
+        if (!isValidEmail) {
+            setMessage("Please enter a valid email address.");
+            setIsError(true);
+            setShowPopup(true);
+            setIsLoading(false);
+            return;
+        }
         try {
             const response = await axios.post<{ exists: boolean }>(
                 `${process.env.NEXT_PUBLIC_API_URL}/account/forgot-password`,
@@ -24,10 +37,13 @@ export default function ForgotPasswordPage() {
                     ? "A password reset email has been sent to your inbox."
                     : "This email does not exist in our records."
             );
+            setIsError(!response.data.exists);
         } catch {
             setMessage("An error occurred. Please try again later.");
+            setIsError(true);
         } finally {
             setIsLoading(false);
+            setShowPopup(true);
         }
     };
 
@@ -59,13 +75,20 @@ export default function ForgotPasswordPage() {
                         disabled={isLoading || !email}>
                         {isLoading ? "Sending..." : "Send Reset Link"}
                     </Button>
-                    {message && (
-                        <div className="text-center text-sm text-gray-700 mt-4">
-                            {message}
-                        </div>
-                    )}
                 </div>
             </div>
+
+            {/* Success or Error Popup */}
+            {showPopup && (
+                <CustomPopup
+                    setShowPopup={setShowPopup}
+                    showPopup={showPopup}
+                    title={isError ? "Error" : "Password Reset"}
+                    desc={message}
+                    setState={setShowPopup}
+                    isError={isError}
+                />
+            )}
         </section>
     );
 }

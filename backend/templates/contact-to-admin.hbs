@@ -1,0 +1,40 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Admin Notification</title>
+    <style>
+      body { font-family: Arial, sans-serif; background-color: #f7f7f7; color:
+      #333; margin: 0; padding: 0; } .container { max-width: 600px; margin: 20px
+      auto; background-color: #ffffff; padding: 20px; border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); } .header { text-align: center;
+      margin-bottom: 20px; } .header img { width: 120px; } h1 { font-size: 24px;
+      color: #444; } .content { margin: 20px 0; } .content p { font-size: 16px;
+      line-height: 1.5; } .content .bold { font-weight: bold; } .footer {
+      text-align: center; margin-top: 30px; font-size: 14px; color: #888; }
+      .footer a { color: #6138bd; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='header'>
+        <img src='your-logo.png' alt='Your Website Logo' />
+      </div>
+      <h1>Hello Admin,</h1>
+      <p>You have received a new contact form submission. Please review the
+        details below:</p>
+      <div class='content'>
+        <p><span class='bold'>Name:</span> {{name}}</p>
+        <p><span class='bold'>Email:</span> {{email}}</p>
+        <p><span class='bold'>Subject:</span> {{subject}}</p>
+        <p><span class='bold'>Message:</span><br /> {{message}}</p>
+      </div>
+      <p>Please follow up as necessary.</p>
+      <div class='footer'>
+        <p>Best regards, <br /> Your Website</p>
+        <p><a href='mailto:your-email@example.com'>Contact us</a>
+          | Phone: (123) 456-7890</p>
+      </div>
+    </div>
+  </body>
+</html>

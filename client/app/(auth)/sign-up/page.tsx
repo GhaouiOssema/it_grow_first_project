@@ -9,14 +9,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 
-import {
-    DialogHeader,
-    DialogContent,
-    Dialog,
-    DialogTitle,
-    DialogDescription,
-} from "@/components/ui/dialog";
 import { userData } from "@/types";
+import CustomPopup from "@/components/CustomPopup";
 
 export default function SignUpPage() {
     const [formData, setFormData] = useState<userData>({
@@ -26,12 +20,16 @@ export default function SignUpPage() {
         confirmPassword: "",
     });
 
-    const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [showPopup, setShowPopup] = useState<boolean>(false);
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] =
         useState<boolean>(false);
+
+    const [popupTitle, setPopupTitle] = useState<string>("");
+    const [popupDesc, setPopupDesc] = useState<string>("");
+    const [error, setError] = useState<boolean>(false);
+
     const router = useRouter();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,11 +43,11 @@ export default function SignUpPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        setError(null);
 
-        // Simple validation
         if (formData.password !== formData.confirmPassword) {
-            setError("Passwords do not match");
+            setPopupTitle("Password Mismatch");
+            setPopupDesc("The passwords do not match.");
+            setShowPopup(true);
             setLoading(false);
             return;
         }
@@ -65,6 +63,11 @@ export default function SignUpPage() {
             );
 
             if (res.status === 201) {
+                setError(false);
+                setPopupTitle("Registration Successful");
+                setPopupDesc(
+                    "You have successfully registered! You will be redirected to the login page shortly."
+                );
                 setShowPopup(true);
 
                 setFormData({
@@ -79,7 +82,10 @@ export default function SignUpPage() {
                 }, 3000);
             }
         } catch (err) {
-            setError("Registration failed. Please try again.");
+            setError(true);
+            setPopupTitle("Registration Failed");
+            setPopupDesc("Registration failed. Please try again.");
+            setShowPopup(true);
             console.log(err);
         } finally {
             setLoading(false);
@@ -171,11 +177,6 @@ export default function SignUpPage() {
                             )}
                         </div>
                     </div>
-                    {error && (
-                        <div className="text-red-500 text-center">
-                            <p>{error}</p>
-                        </div>
-                    )}
                     <Button
                         className="w-full bg-brand-color hover:bg-[#5B32D6]"
                         onClick={handleSubmit}
@@ -216,28 +217,16 @@ export default function SignUpPage() {
                 </div>
             </div>
 
-            {/* Success Popup */}
+            {/* Success or Error Popup */}
             {showPopup && (
-                <Dialog open={showPopup} onOpenChange={setShowPopup}>
-                    <DialogContent className="max-w-sm p-6 bg-white rounded-lg shadow-lg">
-                        <DialogHeader>
-                            <DialogTitle className="text-xl font-semibold text-center text-green-500">
-                                Registration Successful
-                            </DialogTitle>
-                            <DialogDescription className="text-center text-gray-600 mt-2">
-                                You have successfully registered! You will be
-                                redirected to the login page shortly.
-                            </DialogDescription>
-                        </DialogHeader>
-                        <div className="mt-6 text-center">
-                            <Button
-                                className="w-full bg-green-500 hover:bg-green-600 text-white"
-                                onClick={() => setShowPopup(false)}>
-                                Close
-                            </Button>
-                        </div>
-                    </DialogContent>
-                </Dialog>
+                <CustomPopup
+                    setShowPopup={setShowPopup}
+                    showPopup={showPopup}
+                    title={popupTitle}
+                    desc={popupDesc}
+                    setState={setShowPopup}
+                    isError={error}
+                />
             )}
         </section>
     );

@@ -2,6 +2,7 @@ import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { MailerService } from '@nestjs-modules/mailer';
 import { ForgotPasswordDto } from 'src/users/dto/forgot-password.dto/forgot-password.dto';
+import { ResetPasswordDto } from 'src/users/dto/forgot-password.dto/ResetPasswordDto';
 
 @Controller('account')
 export class ForgotPasswordController {
@@ -19,14 +20,19 @@ export class ForgotPasswordController {
       return { exists: false };
     }
 
-    // Generate reset token and save it
+    // Set expiration time for 5 minutes
+    const expirationTime = Date.now() + 5 * 60 * 1000; // 5 minutes from now
     const resetToken = this.usersService.generateResetToken();
-    await this.usersService.updateResetToken(user.id, resetToken);
 
-    // Construct reset link
-    const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+    // Store reset token and expiration time
+    await this.usersService.updateResetToken(
+      user.id,
+      resetToken,
+      expirationTime,
+    );
 
-    // Send email
+    const resetLink = `http://localhost:3000/reset-password?token=${resetToken}&expires=${expirationTime}`;
+
     try {
       await this.mailerService.sendMail({
         to: email,
@@ -38,9 +44,31 @@ export class ForgotPasswordController {
         },
       });
     } catch (error) {
+      console.log(error);
       throw new BadRequestException('Failed to send reset email.');
     }
 
     return { exists: true };
+  }
+
+  @Post('reset-password')
+  async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+    const { token, password, expires } = resetPasswordDto;
+
+    const user = await this.usersService.findByResetToken(token);
+    if (!user) {
+      throw new BadRequestException('Invalid or expired reset token.');
+    }
+
+    // Check if the token is expired
+    if (Date.now() > expires) {
+      throw new BadRequestException('Reset token has expired.');
+    }
+
+    await this.usersService.updatePassword(user.id, password);
+
+    await this.usersService.updateResetToken(user.id, null, null);
+
+    return { message: 'Password reset successfully.' };
   }
 }

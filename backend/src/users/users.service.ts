@@ -59,13 +59,25 @@ export class UsersService {
     return crypto.randomBytes(32).toString('hex');
   }
 
-  async updateResetToken(userId: string, token: string): Promise<void> {
-    const expirationDate = new Date();
-    expirationDate.setHours(expirationDate.getHours() + 1);
-
+  async updateResetToken(
+    userId: string,
+    token: string,
+    expirationTime: number,
+  ): Promise<void> {
     await this.userModel.findByIdAndUpdate(userId, {
       resetToken: token,
-      resetExpires: expirationDate,
+      resetExpires: expirationTime,
     });
+  }
+
+  async updatePassword(userId: string, password: string): Promise<void> {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await this.userModel
+      .updateOne({ _id: userId }, { $set: { password: hashedPassword } })
+      .exec();
+  }
+
+  async findByResetToken(token: string): Promise<User | null> {
+    return this.userModel.findOne({ resetToken: token }).exec();
   }
 }
