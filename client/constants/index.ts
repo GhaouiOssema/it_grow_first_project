@@ -51,3 +51,21 @@ export const images = [
     "/car_image_4.jpg",
     "/car_image_5.jpg",
 ];
+
+export const items = [
+    {
+        text: "Food Photography",
+        color: "text-brand-color",
+        lineColor: "bg-brand-color",
+    },
+    {
+        text: "Wedding Photoshoot",
+        color: "text-brand-color",
+        lineColor: "bg-brand-color",
+    },
+    {
+        text: "Product Art",
+        color: "text-brand-color",
+        lineColor: "bg-brand-color",
+    },
+];

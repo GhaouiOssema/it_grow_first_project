@@ -114,7 +114,7 @@ const Navbar = () => {
                         <Link href="/sign-in">
                             <Button
                                 variant="default"
-                                className="bg-[#6C3BF4] hover:bg-[#5B32D6]">
+                                className="bg-brand-color hover:bg-[#5B32D6]">
                                 Sign in
                             </Button>
                         </Link>

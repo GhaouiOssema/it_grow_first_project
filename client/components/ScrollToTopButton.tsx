@@ -33,7 +33,7 @@ export function ScrollUpButton() {
 
     return (
         <Button
-            className="w-12 h-12 fixed bottom-4 right-4 rounded-full p-2 bg-[#6138BD] hover:bg-[#5B32D6] transition-all duration-300 shadow-lg"
+            className="w-12 h-12 fixed bottom-4 right-4 rounded-full p-2 bg-brand-color hover:bg-[#5B32D6] transition-all duration-300 shadow-lg"
             onClick={scrollToTop}
             aria-label="Scroll to top">
             <svg

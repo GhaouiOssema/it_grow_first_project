@@ -1,21 +1,13 @@
 "use client";
 
-import {
-    Facebook,
-    Instagram,
-    Linkedin,
-    MapPin,
-    Phone,
-    Mail,
-    MousePointer2,
-} from "lucide-react";
-import Link from "next/link";
+import { MapPin, Phone, Mail, MousePointer2 } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ContactFormData } from "@/types";
 import axios from "axios";
 import CustomPopup from "./CustomPopup";
+import SocialMediaSection from "./SocialMediaSection";
 
 const ContactSection = () => {
     const [form, setForm] = useState<ContactFormData>({
@@ -186,34 +178,7 @@ const ContactSection = () => {
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="flex items-center justify-between gap-3">
-                                <div className="font-semibold text-nowrap text-xs md:text-lg flex items-center gap-3">
-                                    <div className="h-1 w-1 rounded-full bg-white" />
-                                    <span>Follow Me on</span>
-                                </div>
-                                <div className="w-full h-[2px] bg-white" />
-                                <div className="flex gap-4">
-                                    <Link
-                                        href="#"
-                                        className="bg-white p-3 rounded-md transition-colors">
-                                        <Instagram
-                                            strokeWidth="3px"
-                                            className="h-[18.15px] w-[18.2px] text-[#11204D]"
-                                        />
-                                    </Link>
-                                    <Link
-                                        href="#"
-                                        className="bg-white p-3 rounded-md transition-colors">
-                                        <Facebook className="h-[18.15px] w-[18.2px] text-[#11204D]" />
-                                    </Link>
-                                    <Link
-                                        href="#"
-                                        className="bg-white p-3 rounded-md transition-colors">
-                                        <Linkedin className="h-[18.15px] w-[18.2px] text-[#11204D]" />
-                                    </Link>
-                                </div>
-                            </div>
+                            <SocialMediaSection section="contact" />
                         </div>
                     </div>
                 </div>

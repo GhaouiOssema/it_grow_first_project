@@ -1,31 +1,15 @@
 "use client";
 
+import { items } from "@/constants";
 import Image from "next/image";
 import React, { useState } from "react";
 
 const ServicesSection = () => {
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
-    const items = [
-        {
-            text: "Food Photography",
-            color: "text-brand-color",
-            lineColor: "bg-brand-color",
-        },
-        {
-            text: "Wedding Photoshoot",
-            color: "text-brand-color",
-            lineColor: "bg-brand-color",
-        },
-        {
-            text: "Product Art",
-            color: "text-brand-color",
-            lineColor: "bg-brand-color",
-        },
-    ];
     return (
         <section className="container mx-auto py-16" id="services">
-            <div className="text-star mb-12 ">
+            <div className="text-start mb-6">
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#11204D] font-playfair mb-1">
                     What I Offer
                 </h1>
@@ -33,7 +17,7 @@ const ServicesSection = () => {
                     Creative solutions to bring your vision to life{" "}
                 </p>
             </div>
-            <div className="flex flex-col md:flex-row mt-12 gap-12 items-center justify-center ">
+            <div className="flex flex-col md:flex-row gap-12 items-center justify-center ">
                 <div className="w-[80%] space-y-6 text-left">
                     {items.map((item, index) => (
                         <h3
