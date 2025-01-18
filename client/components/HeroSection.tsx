@@ -7,9 +7,7 @@ const HeroSection = () => {
         <section
             className="container mx-auto px-5 sm:px-10 lg:px-20 xl:px-40 mt-20 sm:mt-20 lg:mt-24 py-5 space-y-6"
             id="/">
-            {/* Hero Content */}
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-                {/* Text Section */}
                 <div className=" flex flex-col items-center md:items-start space-y-6 text-center lg:text-left">
                     <h1 className="font-syne text-[#2D3436] text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight">
                         Hello
@@ -29,13 +27,11 @@ const HeroSection = () => {
                     </div>
                 </div>
 
-                {/* Carousel Section */}
                 <div className="w-full lg:w-1/2 flex flex-col lg:flex-row lg:justify-start items-center ">
                     <Carousel />
                 </div>
             </div>
 
-            {/* Description Section */}
             <p className="text-[#636E72] text-base sm:text-lg lg:text-xl leading-relaxed max-w-[650px] mx-auto lg:mx-0">
                 I help tell clients create{" "}
                 <span className="text-[#2D3436] font-medium">brands</span>,
@@ -47,7 +43,6 @@ const HeroSection = () => {
                 , innovate, find opportunities and validate ideas.
             </p>
 
-            {/* Social Media Section */}
             <div className=" w-full lg:w-[40%] mx-auto lg:mx-0">
                 <SocialMediaSection section="hero" />
             </div>
