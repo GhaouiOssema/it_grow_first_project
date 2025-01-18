@@ -50,8 +50,8 @@ export default function TestimonialSection() {
                     </p>
                 </div>
 
-                <div className="relative w-full">
-                    <Carousel className="w-full">
+                <div className="relative w-full px-5">
+                    <Carousel className="">
                         <CarouselContent
                             className="flex transition-transform ease-in-out duration-500"
                             style={{

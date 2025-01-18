@@ -20,7 +20,7 @@ export default function PricingSection() {
                     {pricingPlans.map((plan, index) => (
                         <div key={index} className="px-5">
                             <Card
-                                className={`boor relative overflow-hidden py-8 px-8 rounded-[10px] shadow-lg transition-transform hover:scale-105 ${
+                                className={`relative overflow-hidden py-8 px-8 rounded-[10px] shadow-lg transition-transform hover:scale-105 ${
                                     plan.cardClass
                                         ? " bg-[#6138bd]/20"
                                         : "bg-white"

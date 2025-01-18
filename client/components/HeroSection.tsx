@@ -5,8 +5,8 @@ import Carousel from "./Carousel";
 
 const HeroSection = () => {
     return (
-        <section className="container mt-24 py-16 boor" id="/">
-            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px] boor">
+        <section className="container mt-24 py-16 " id="/">
+            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px] ">
                 <div className="flex flex-col justify-center space-y-8">
                     <div className="space-y-6">
                         <div className="space-y-2">

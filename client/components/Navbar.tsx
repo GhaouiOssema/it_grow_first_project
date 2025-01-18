@@ -65,7 +65,7 @@ const Navbar = () => {
     };
 
     return (
-        <header className="fixed top-0 z-50 w-screen bg-white">
+        <header className="fixed top-0 z-50 w-screen bg-white border-b-2 shadow-md">
             <div className="container h-20 flex items-center justify-between">
                 <Sidebar activeSection={activeSection} />
                 <div className="flex items-center">

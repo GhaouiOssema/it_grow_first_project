@@ -188,10 +188,10 @@ const ContactSection = () => {
                             </div>
 
                             <div className="flex items-center justify-between gap-3">
-                                <p className="font-semibold text-nowrap text-xs md:text-lg flex items-center gap-3">
+                                <div className="font-semibold text-nowrap text-xs md:text-lg flex items-center gap-3">
                                     <div className="h-1 w-1 rounded-full bg-white" />
                                     <span>Follow Me on</span>
-                                </p>
+                                </div>
                                 <div className="w-full h-[2px] bg-white" />
                                 <div className="flex gap-4">
                                     <Link
