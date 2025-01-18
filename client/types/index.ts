@@ -48,9 +48,10 @@ export interface StarRatingProps {
 }
 
 export interface Testimonial {
-    id: number;
+    _id: number;
     name: string;
     avatar: string;
     quote: string;
     rating: number;
 }
+

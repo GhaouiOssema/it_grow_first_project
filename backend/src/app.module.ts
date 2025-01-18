@@ -12,6 +12,7 @@ import { join } from 'path';
 import { MailModule } from './mail/mail.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { BlogModule } from './blog/blog.module';
+import { TestimonialsModule } from './testimonials/testimonials.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { BlogModule } from './blog/blog.module';
     }),
     MailModule,
     BlogModule,
+    TestimonialsModule,
   ],
   controllers: [AppController, ForgotPasswordController],
   providers: [AppService],
