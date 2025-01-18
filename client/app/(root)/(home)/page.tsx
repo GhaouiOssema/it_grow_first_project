@@ -24,7 +24,7 @@ export default function LandingPage() {
             <Testimonial />
 
             {/* Portfolio Grid */}
-            {/* <PortfolioGrid /> */}
+            <PortfolioGrid />
 
             {/* Pricing Section */}
             <PricingSection />

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import SectionTitle from "./SectionTitle";
 
 const AboutSection = () => {
     return (
@@ -14,15 +15,11 @@ const AboutSection = () => {
                         className="rounded-lg h-full"
                     />
                     <div className="flex flex-col items-start w-full lg:w-[45%]">
-                        <div className="text-start">
-                            <h1 className="text-3xl sm:text-4xl font-bold text-[#11204D] font-playfair mb-1">
-                                About Me
-                            </h1>
-                            <p className="text-[#11204D59] font-bold font-playfair">
-                                Capturing Moments, Exploring Worlds, and
-                                Crafting Stories{" "}
-                            </p>
-                        </div>
+                        <SectionTitle
+                            title="About Me"
+                            subTitle="Capturing Moments, Exploring Worlds, andCrafting Stories"
+                            className="text-start"
+                        />
                         <div className="flex flex-col items-start py-5 text-sm md:text-lg text-[#11204DB2]">
                             <span>
                                 With a passion for storytelling through lenses,

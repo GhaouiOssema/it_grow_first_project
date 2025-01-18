@@ -6,6 +6,7 @@ import axios from "axios";
 import { StarRating } from "./star-rating";
 import { Testimonial } from "@/types";
 import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import SectionTitle from "./SectionTitle";
 
 export default function TestimonialSection() {
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -41,14 +42,11 @@ export default function TestimonialSection() {
     return (
         <section className="w-full py-16">
             <div className="mauto">
-                <div className="text-center mb-12">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-[#11204D] font-playfair mb-3">
-                        Testimonial
-                    </h1>
-                    <p className="text-[#11204D59] font-bold font-playfair">
-                        Hear What My Clients Have to Say
-                    </p>
-                </div>
+                <SectionTitle
+                    title="Testimonial"
+                    subTitle="Hear What My Clients Have to Say"
+                    className="text-center"
+                />
 
                 <div className="relative w-full px-5">
                     <Carousel className="">

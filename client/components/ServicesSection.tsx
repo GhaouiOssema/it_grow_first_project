@@ -3,20 +3,18 @@
 import { items } from "@/constants";
 import Image from "next/image";
 import React, { useState } from "react";
+import SectionTitle from "./SectionTitle";
 
 const ServicesSection = () => {
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
     return (
         <section className="container mx-auto py-16" id="services">
-            <div className="text-start mb-6">
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#11204D] font-playfair mb-1">
-                    What I Offer
-                </h1>
-                <p className="text-[#11204D59] font-bold font-playfair">
-                    Creative solutions to bring your vision to life{" "}
-                </p>
-            </div>
+            <SectionTitle
+                title="What I Offer"
+                subTitle="Creative solutions to bring your vision to life"
+                className="text-start"
+            />
             <div className="flex flex-col md:flex-row gap-12 items-center justify-center ">
                 <div className="w-[80%] space-y-6 text-left">
                     {items.map((item, index) => (

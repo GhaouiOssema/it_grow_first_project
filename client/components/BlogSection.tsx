@@ -6,6 +6,7 @@ import Image from "next/image";
 import axios from "axios";
 import { BlogPost } from "@/types";
 import { Badge } from "./ui/badge";
+import SectionTitle from "./SectionTitle";
 
 const BlogSection = () => {
     const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -28,19 +29,15 @@ const BlogSection = () => {
     return (
         <section className="w-full py-16 px-4 sm:px-6 lg:px-8" id="blog">
             <div className="max-w-7xl mx-auto">
-                <div className="mb-12 text-center">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-[#11204D] font-playfair mb-3">
-                        From The Blog
-                    </h1>
-                    <p className="text-[#11204D59] font-bold font-playfair">
-                        Stories, Tips, and Inspiration
-                    </p>
-                </div>
+                <SectionTitle
+                    title="From The Blog"
+                    subTitle="Stories, Tips, and Inspiration"
+                    className="text-center"
+                />
+
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 pt-10">
                     {posts.map((post, i) => (
-                        <div
-                            key={i}
-                            className="relative ">
+                        <div key={i} className="relative ">
                             <div className="absolute top-[7rem] -translate-y-1/2 w-full px-4">
                                 <div className="relative w-full h-[300px] ">
                                     <Badge className="absolute top-4 left-4 z-10 text-xs sm:text-sm font-normal leading-[15.61px] py-[5px] tracking-[1px] px-[10px] bg-purple-600 hover:bg-purple-700 uppercase">

@@ -1,10 +1,15 @@
 import Image from "next/image";
 import React from "react";
+import SectionTitle from "./SectionTitle";
 
 const PortfolioGrid = () => {
     return (
         <section className="container py-16" id="works">
-            <h2 className="mb-12 text-2xl font-bold">My Work</h2>
+            <SectionTitle
+                title="My Work"
+                subTitle='A Glimpse Into My Creative World"'
+                className="text-center"
+            />
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {Array.from({ length: 12 }).map((_, i) => (
                     <Image

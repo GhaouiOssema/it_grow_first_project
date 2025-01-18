@@ -2,19 +2,17 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { pricingPlans } from "@/constants";
+import SectionTitle from "./SectionTitle";
 
 export default function PricingSection() {
     return (
         <section className="w-full py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-12">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-[#11204D] font-playfair mb-3">
-                        Plans & Pricing
-                    </h1>
-                    <p className="text-[#11204D59] font-bold font-playfair">
-                        Tailored Packages to Elevate Your Vision
-                    </p>
-                </div>
+                <SectionTitle
+                    title="Plans & Pricing"
+                    subTitle="Tailored Packages to Elevate Your Vision"
+                    className="text-center"
+                />
 
                 <div className="grid gap-8 md:gap-0 px-0 md:px-24 md:grid-cols-3">
                     {pricingPlans.map((plan, index) => (
