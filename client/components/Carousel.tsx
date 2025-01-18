@@ -41,7 +41,6 @@ const Carousel = () => {
                                         width={280}
                                         height={380}
                                         className="rounded-2xl object-cover"
-                                       
                                     />
                                 </CardContent>
                             </Card>
