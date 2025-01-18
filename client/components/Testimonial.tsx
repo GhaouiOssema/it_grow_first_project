@@ -39,7 +39,7 @@ export default function TestimonialSection() {
     }, [nextSlide]);
 
     return (
-        <section className="w-full py-16 ">
+        <section className="w-full py-16">
             <div className="mauto">
                 <div className="text-center mb-12">
                     <h1 className="text-3xl sm:text-4xl font-bold text-[#11204D] font-playfair mb-3">

@@ -26,7 +26,7 @@ const BlogSection = () => {
     }, []);
 
     return (
-        <section className="w-full py-12 px-4 sm:px-6 lg:px-8" id="blog">
+        <section className="w-full py-16 px-4 sm:px-6 lg:px-8" id="blog">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-12 text-center">
                     <h1 className="text-3xl sm:text-4xl font-bold text-[#11204D] font-playfair mb-3">

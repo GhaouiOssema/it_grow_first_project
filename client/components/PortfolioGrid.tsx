@@ -3,7 +3,7 @@ import React from "react";
 
 const PortfolioGrid = () => {
     return (
-        <section className="container py-12" id="works">
+        <section className="container py-16" id="works">
             <h2 className="mb-12 text-2xl font-bold">My Work</h2>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {Array.from({ length: 12 }).map((_, i) => (

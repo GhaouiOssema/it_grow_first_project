@@ -18,13 +18,13 @@ export default function LandingPage() {
             {/* <AboutSection /> */}
 
             {/* Services Section */}
-            {/* <ServicesSection /> */}
-
-            {/* Portfolio Grid */}
-            {/* <PortfolioGrid /> */}
+            <ServicesSection />
 
             {/* Testimonial */}
             <Testimonial />
+
+            {/* Portfolio Grid */}
+            {/* <PortfolioGrid /> */}
 
             {/* Pricing Section */}
             <PricingSection />
