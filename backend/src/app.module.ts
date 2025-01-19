@@ -13,6 +13,7 @@ import { MailModule } from './mail/mail.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { BlogModule } from './blog/blog.module';
 import { TestimonialsModule } from './testimonials/testimonials.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { TestimonialsModule } from './testimonials/testimonials.module';
     MailModule,
     BlogModule,
     TestimonialsModule,
+    ProjectModule,
   ],
   controllers: [AppController, ForgotPasswordController],
   providers: [AppService],
