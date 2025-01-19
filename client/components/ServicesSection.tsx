@@ -52,18 +52,18 @@ const ServicesSection = () => {
                                 <Image
                                     src={items[activeIndex].image[0].img}
                                     alt="Beauty products collection on marble surface"
-                                    className="object-cover rounded-[10px] boor"
+                                    className="object-cover rounded-[10px]"
                                     width={300}
                                     height={200}
                                 />
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="aspect-square relative rounded-[10px] overflow-hidden boor">
+                                <div className="aspect-square relative rounded-[10px] overflow-hidden">
                                     <Image
                                         src={items[activeIndex].image[2].img}
                                         alt="Cocooil product bottle"
-                                        className="object-cover rounded-[10px] boor w-[120px] h-[138px] "
+                                        className="object-cover rounded-[10px] w-[120px] h-[138px] "
                                         width={300}
                                         height={200}
                                     />

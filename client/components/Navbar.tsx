@@ -89,6 +89,10 @@ const Navbar = () => {
                         <Link
                             key={index}
                             href={link.href}
+                            onClick={() => {
+                                if (link.href === "#home")
+                                    window.location.href = "/";
+                            }}
                             className={`text-foreground/60 transition-colors hover:text-[#6138BD] relative pb-2 group ${
                                 activeSection === link.href
                                     ? "text-[#6138BD]"
@@ -149,7 +153,7 @@ const Navbar = () => {
                             {dropdownOpen && (
                                 <div className="z-50 absolute top-[5rem] md:top-24 right-0 md:right-5 bg-white divide-y divide-gray-100 rounded-none md:rounded-xl shadow-lg w-full md:w-64 dark:bg-gray-700 dark:divide-gray-600">
                                     <div className="px-5 container py-2 border border-brand-color rounded-none md:rounded-xl">
-                                        <div className="border border-brand-color rounded-xl bg-brand-color px-4 py-2 text-sm text-gray-900 dark:text-white flex items-center space-x-3 gap-2">
+                                        <div className="mb-2 border border-brand-color rounded-xl bg-brand-color px-4 py-2 text-sm text-gray-900 dark:text-white flex items-center space-x-3 gap-2">
                                             <div className="flex h-10 w-10 md:w-20 items-center justify-center border border-white rounded-full">
                                                 <UserRound className="h-6 w-6 text-white" />
                                             </div>

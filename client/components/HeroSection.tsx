@@ -6,7 +6,7 @@ const HeroSection = () => {
     return (
         <section
             className="container mx-auto px-5 sm:px-10 lg:px-20 xl:px-40 mt-20 sm:mt-20 lg:mt-24 py-5 space-y-6"
-            id="/">
+            id="home">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
                 <div className=" flex flex-col items-center md:items-start space-y-6 text-center lg:text-left">
                     <h1 className="font-syne text-[#2D3436] text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight">
