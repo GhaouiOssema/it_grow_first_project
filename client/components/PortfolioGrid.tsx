@@ -41,13 +41,13 @@ const PortfolioGrid = () => {
             {!loading && projects ? (
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                     {projects.map((project, i) => (
-                        <div key={i} className="relative p-8">
+                        <div key={i} className="relative p-3">
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/projects/${project.imageUrl}`}
                                 alt={`Portfolio ${i + 1}`}
                                 width={300}
                                 height={300}
-                                className="rounded-lg object-cover"
+                                className="rounded-[10px] object-cover"
                             />
                         </div>
                     ))}

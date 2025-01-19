@@ -9,7 +9,7 @@ import { Sidebar } from "./Sidebar";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { Token } from "@/types";
-import { CircleUserRound, LogOut, UserRound } from "lucide-react";
+import { LogOut, UserRound } from "lucide-react";
 
 const Navbar = () => {
     const [activeSection, setActiveSection] = useState("#/");
@@ -162,16 +162,6 @@ const Navbar = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <ul className="mb-2 mt-2 pl-3 py-2 hover:bg-blue-100 rounded-lg">
-                                            <li className=" flex items-center">
-                                                <CircleUserRound className="text-brand-color" />
-                                                <Link
-                                                    href="/profile"
-                                                    className="block px-4 py-2 text-sm hover:text-brand-color">
-                                                    Profile
-                                                </Link>
-                                            </li>
-                                        </ul>
                                         <div className="pl-3 py-2 flex items-center hover:bg-red-100 rounded-lg">
                                             <LogOut className="text-red-500" />
                                             <button

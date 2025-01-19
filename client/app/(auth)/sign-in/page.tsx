@@ -47,7 +47,8 @@ export default function SignInPage() {
 
             localStorage.setItem("token", response.data.access_token);
 
-            router.push("/profile");
+            window.location.reload();
+            router.push("/");
         } catch (err) {
             const message =
                 axios.isAxiosError(err) && err.response?.data?.message
@@ -63,12 +64,12 @@ export default function SignInPage() {
 
     const handleGoogleLogin = async () => {
         const result = await signIn("google", {
-            callbackUrl: "http://localhost:3000/profile",
+            callbackUrl: "http://localhost:3000/",
         });
 
         if (result?.url) {
             const session = await getSession();
-            console.log("Session data after Google login:", session); 
+            console.log("Session data after Google login:", session);
 
             if (session && session.accessToken) {
                 localStorage.setItem("token", session.accessToken);
