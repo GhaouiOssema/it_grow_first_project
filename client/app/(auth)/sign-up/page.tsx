@@ -89,19 +89,12 @@ export default function SignUpPage() {
             // Type assertion: Ensure 'err' is a CustomError
             const error = err as CustomError;
 
-            console.log(error.message); // Log the error message received from the server
+            console.log(error.message); // Logs the error message received from the server
+            console.log(error.code); // Logs the error code (e.g., 400)
 
-            // Customize title based on the error message if needed
-            if (error.message.includes("Email is already in use")) {
-                setPopupTitle("Email Already Registered");
-            } else if (error.message.includes("Username is already in use")) {
-                setPopupTitle("Username Taken");
-            } else {
-                setPopupTitle("Registration Failed");
-            }
-
-            // Display the exact message from the server
-            setPopupDesc(error.message);
+            // Display the exact message from the server in the popup
+            setPopupTitle("Error");
+            setPopupDesc(error.message); // Show the message received from the server
 
             setShowPopup(true);
         } finally {

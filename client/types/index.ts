@@ -62,5 +62,5 @@ export interface Project {
 
 export interface CustomError {
     message: string;
-    statusCode: number;
+    code: number;
 }

@@ -10,11 +10,6 @@ import { User } from './schemas/user.schema';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 
-interface CustomError {
-  message: string;
-  code?: number;
-}
-
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
@@ -29,17 +24,13 @@ export class UsersService {
     });
 
     if (existingUser) {
-      const errorMessage =
-        existingUser.email === userData.email
-          ? 'Email is already in use'
-          : 'Username is already in use';
-
-      const customError: CustomError = {
-        message: errorMessage,
-        code: HttpStatus.BAD_REQUEST,
-      };
-
-      throw new HttpException(customError, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.BAD_REQUEST,
+          message: 'This information is already in use. Please try another.',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
     const hashedPassword = await bcrypt.hash(userData.password, 10);
