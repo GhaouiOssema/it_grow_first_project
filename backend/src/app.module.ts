@@ -21,25 +21,25 @@ import { ProjectModule } from './project/project.module';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    MongooseModule.forRoot(process.env.VERCEL_MONGO_URI),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     AuthModule,
     UsersModule,
     MailerModule.forRoot({
       transport: {
-        service: process.env.VERCEL_SERVICE_PROVIDER,
+        service: process.env.SERVICE_PROVIDER,
         auth: {
-          user: process.env.VERCEL_SMTP_USER,
-          pass: process.env.VERCEL_SMTP_PASSWORD,
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASSWORD,
         },
       },
       defaults: {
-        from: `"No Reply" <${process.env.VERCEL_ADMIN_EMAIL}>`,
+        from: `"No Reply" <${process.env.ADMIN_EMAIL}>`,
       },
       template: {
         dir: join(
           __dirname,
           '..',
-          process.env.VERCEL_TEMPLATES_DESTINATION_FOLDER,
+          process.env.TEMPLATES_DESTINATION_FOLDER,
         ),
         adapter: new HandlebarsAdapter(),
         options: {
@@ -51,9 +51,9 @@ import { ProjectModule } from './project/project.module';
       rootPath: join(
         __dirname,
         '..',
-        process.env.VERCEL_UPLOAD_DESTINATION_FOLDER,
+        process.env.UPLOAD_DESTINATION_FOLDER,
       ),
-      serveRoot: `/${process.env.VERCEL_TEMPLATES_DESTINATION_FOLDER}`,
+      serveRoot: `/${process.env.TEMPLATES_DESTINATION_FOLDER}`,
     }),
     MailModule,
     BlogModule,
