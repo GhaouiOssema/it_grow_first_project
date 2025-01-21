@@ -9,7 +9,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 
-import { CustomError, userData } from "@/types";
+import { userData } from "@/types";
 import CustomPopup from "@/components/CustomPopup";
 import { jwtDecode } from "jwt-decode";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
@@ -42,7 +42,7 @@ export default function SignUpPage() {
         }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
         setLoading(true);
 
@@ -83,19 +83,16 @@ export default function SignUpPage() {
                     router.push("/sign-in");
                 }, 3000);
             }
-        } catch (err: unknown) {
+        } catch (err) {
             setError(true);
+            setPopupTitle("Registration Failed");
 
-            // Type assertion: Ensure 'err' is a CustomError
-            const error = err as CustomError;
+            const message =
+                axios.isAxiosError(err) && err.response?.data?.message
+                    ? err.response.data.message
+                    : "An error occurred during registartion.";
 
-            console.log(error.message); // Logs the error message received from the server
-            console.log(error.statusCode); // Logs the error code (e.g., 400)
-
-            // Display the exact message from the server in the popup
-            setPopupTitle("Error");
-            setPopupDesc(error.message); // Show the message received from the server
-
+            setPopupDesc(message);
             setShowPopup(true);
         } finally {
             setLoading(false);
