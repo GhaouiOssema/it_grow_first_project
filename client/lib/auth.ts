@@ -5,8 +5,8 @@ import GoogleProvider from "next-auth/providers/google";
 export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+            clientId: process.env.NEXT_GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.NEXT_GOOGLE_CLIENT_SECRET!,
         }),
     ],
     callbacks: {
@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
             if (account && profile) {
                 try {
                     const response = await axios.post(
-                        "http://localhost:3001/auth/validate-user",
+                        `${process.env.NEXT_PUBLIC_API_URL}/auth/validate-user`,
                         {
                             email: profile.email,
                         }
