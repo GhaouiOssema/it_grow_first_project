@@ -9,7 +9,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 
-import { userData } from "@/types";
+import { CustomError, userData } from "@/types";
 import CustomPopup from "@/components/CustomPopup";
 import { jwtDecode } from "jwt-decode";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
@@ -83,12 +83,36 @@ export default function SignUpPage() {
                     router.push("/sign-in");
                 }, 3000);
             }
-        } catch (err) {
+        } catch (err: unknown) {
             setError(true);
-            setPopupTitle("Registration Failed");
-            setPopupDesc("Registration failed. Please try again.");
+
+            // Type assertion: tell TypeScript that 'err' is of type 'CustomError'
+            const error = err as CustomError;
+
+            if (error.message) {
+                if (error.message.includes("Email is already in use")) {
+                    setPopupTitle("Email Already Registered");
+                    setPopupDesc(
+                        "The email address is already in use. Please try another."
+                    );
+                } else if (
+                    error.message.includes("Username is already in use")
+                ) {
+                    setPopupTitle("Username Taken");
+                    setPopupDesc(
+                        "The username is already taken. Please choose a different one."
+                    );
+                } else {
+                    setPopupTitle("Registration Failed");
+                    setPopupDesc("Registration failed. Please try again.");
+                }
+            } else {
+                setPopupTitle("Registration Failed");
+                setPopupDesc("An unexpected error occurred. Please try again.");
+            }
+
             setShowPopup(true);
-            console.log(err);
+            console.log(error);
         } finally {
             setLoading(false);
         }
