@@ -14,6 +14,16 @@ export class UsersService {
     password: string;
     username: string;
   }): Promise<User> {
+    const existingUser = await this.userModel.findOne({
+      $or: [{ email: userData.email }, { username: userData.username }],
+    });
+    if (existingUser) {
+      throw new Error(
+        existingUser.email === userData.email
+          ? 'Email is already in use'
+          : 'Username is already in use',
+      );
+    }
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     return this.userModel.create({ ...userData, password: hashedPassword });
   }
