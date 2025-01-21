@@ -90,7 +90,7 @@ export default function SignUpPage() {
             const error = err as CustomError;
 
             console.log(error.message); // Logs the error message received from the server
-            console.log(error.code); // Logs the error code (e.g., 400)
+            console.log(error.statusCode); // Logs the error code (e.g., 400)
 
             // Display the exact message from the server in the popup
             setPopupTitle("Error");
