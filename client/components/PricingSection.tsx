@@ -14,7 +14,7 @@ export default function PricingSection() {
                     className="text-center"
                 />
 
-                <div className="grid gap-8 md:gap-0 px-0 md:px-24 md:grid-cols-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-0 px-0">
                     {pricingPlans.map((plan, index) => (
                         <div key={index} className="px-5">
                             <Card
