@@ -86,33 +86,24 @@ export default function SignUpPage() {
         } catch (err: unknown) {
             setError(true);
 
-            // Type assertion: tell TypeScript that 'err' is of type 'CustomError'
+            // Type assertion: Ensure 'err' is a CustomError
             const error = err as CustomError;
 
-            if (error.message) {
-                if (error.message.includes("Email is already in use")) {
-                    setPopupTitle("Email Already Registered");
-                    setPopupDesc(
-                        "The email address is already in use. Please try another."
-                    );
-                } else if (
-                    error.message.includes("Username is already in use")
-                ) {
-                    setPopupTitle("Username Taken");
-                    setPopupDesc(
-                        "The username is already taken. Please choose a different one."
-                    );
-                } else {
-                    setPopupTitle("Registration Failed");
-                    setPopupDesc("Registration failed. Please try again.");
-                }
+            console.log(error.message); // Log the error message received from the server
+
+            // Customize title based on the error message if needed
+            if (error.message.includes("Email is already in use")) {
+                setPopupTitle("Email Already Registered");
+            } else if (error.message.includes("Username is already in use")) {
+                setPopupTitle("Username Taken");
             } else {
                 setPopupTitle("Registration Failed");
-                setPopupDesc("An unexpected error occurred. Please try again.");
             }
 
+            // Display the exact message from the server
+            setPopupDesc(error.message);
+
             setShowPopup(true);
-            console.log(error);
         } finally {
             setLoading(false);
         }
