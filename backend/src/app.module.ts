@@ -36,11 +36,7 @@ import { ProjectModule } from './project/project.module';
         from: `"No Reply" <${process.env.ADMIN_EMAIL}>`,
       },
       template: {
-        dir: join(
-          __dirname,
-          '..',
-          process.env.TEMPLATES_DESTINATION_FOLDER,
-        ),
+        dir: join(__dirname, '..', 'templates'),
         adapter: new HandlebarsAdapter(),
         options: {
           strict: true,
@@ -48,12 +44,8 @@ import { ProjectModule } from './project/project.module';
       },
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(
-        __dirname,
-        '..',
-        process.env.UPLOAD_DESTINATION_FOLDER,
-      ),
-      serveRoot: `/${process.env.TEMPLATES_DESTINATION_FOLDER}`,
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
     }),
     MailModule,
     BlogModule,

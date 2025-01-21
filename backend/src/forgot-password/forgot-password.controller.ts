@@ -31,7 +31,7 @@ export class ForgotPasswordController {
       expirationTime,
     );
 
-    const resetLink = `http://localhost:3000/reset-password?token=${resetToken}&expires=${expirationTime}`;
+    const resetLink = `${process.env.FORGOT_PASSWORD_REDIRECTION_URL}/reset-password?token=${resetToken}&expires=${expirationTime}`;
 
     try {
       await this.mailerService.sendMail({
@@ -60,7 +60,6 @@ export class ForgotPasswordController {
       throw new BadRequestException('Invalid or expired reset token.');
     }
 
-    // Check if the token is expired
     if (Date.now() > expires) {
       throw new BadRequestException('Reset token has expired.');
     }

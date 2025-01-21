@@ -21,7 +21,7 @@ export class MailService {
     const { name, email, subject, message } = data;
     try {
       await this.mailerService.sendMail({
-        to: 'oghawi220@gmail.com',
+        to: process.env.ADMIN_EMAIL,
         subject: `New Contact Form Submission: ${subject}`,
         template: 'contact-to-admin',
         context: { name, email, subject, message },
