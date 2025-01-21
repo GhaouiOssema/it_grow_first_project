@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './schemas/user.schema';
@@ -17,13 +22,18 @@ export class UsersService {
     const existingUser = await this.userModel.findOne({
       $or: [{ email: userData.email }, { username: userData.username }],
     });
+
     if (existingUser) {
-      throw new Error(
+      const errorMessage =
         existingUser.email === userData.email
           ? 'Email is already in use'
-          : 'Username is already in use',
+          : 'Username is already in use';
+      throw new HttpException(
+        { statusCode: HttpStatus.BAD_REQUEST, message: errorMessage },
+        HttpStatus.BAD_REQUEST,
       );
     }
+
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     return this.userModel.create({ ...userData, password: hashedPassword });
   }
