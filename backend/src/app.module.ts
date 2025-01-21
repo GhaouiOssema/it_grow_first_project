@@ -21,24 +21,26 @@ import { ProjectModule } from './project/project.module';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    MongooseModule.forRoot(
-      'mongodb+srv://oghawi220:TnoasdnPigaXyP8X@cluster0.wi6bhd8.mongodb.net/nest',
-    ),
+    MongooseModule.forRoot(process.env.VERCEL_MONGO_URI),
     AuthModule,
     UsersModule,
     MailerModule.forRoot({
       transport: {
-        service: 'gmail',
+        service: process.env.VERCEL_SERVICE_PROVIDER,
         auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASSWORD,
+          user: process.env.VERCEL_SMTP_USER,
+          pass: process.env.VERCEL_SMTP_PASSWORD,
         },
       },
       defaults: {
-        from: '"No Reply" <oghawi220@gmail.com>',
+        from: `"No Reply" <${process.env.VERCEL_ADMIN_EMAIL}>`,
       },
       template: {
-        dir: join(__dirname, '..', 'templates'),
+        dir: join(
+          __dirname,
+          '..',
+          process.env.VERCEL_TEMPLATES_DESTINATION_FOLDER,
+        ),
         adapter: new HandlebarsAdapter(),
         options: {
           strict: true,
@@ -46,8 +48,12 @@ import { ProjectModule } from './project/project.module';
       },
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads'),
-      serveRoot: '/uploads',
+      rootPath: join(
+        __dirname,
+        '..',
+        process.env.VERCEL_UPLOAD_DESTINATION_FOLDER,
+      ),
+      serveRoot: `/${process.env.VERCEL_TEMPLATES_DESTINATION_FOLDER}`,
     }),
     MailModule,
     BlogModule,

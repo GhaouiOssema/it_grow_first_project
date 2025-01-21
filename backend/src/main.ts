@@ -10,6 +10,6 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
   });
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.VERCEL_LOCAL_PORT ?? 3000);
 }
 bootstrap();

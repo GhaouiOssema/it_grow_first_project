@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/main.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/main.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
+    }
+  ],
+  "env": {
+    "VERCEL_MONGO_URI": "mongodb+srv://oghawi220:TnoasdnPigaXyP8X@cluster0.wi6bhd8.mongodb.net/nest",
+    "VERCEL_JWT_SECRET": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTczNjMyOTE2NywiaWF0IjoxNzM2MzI5MTY3fQ.t-TrnnHfOrpV58GFzexVBSu7dg3cAbv7Z2Z6KnfshQ0",
+    "VERCEL_JWT_EXPIRATION": "7d",
+    "VERCEL_SMTP_PASSWORD": "orsn qacm izru yofc",
+    "VERCEL_SMTP_USER": "oghawi220@gmail.com",
+    "VERCEL_FRONTEND_URL": "http://localhost:3000/forgot-password",
+    "VERCEL_ADMIN_EMAIL": "oghawi220@gmail.com",
+    "VERCEL_LOCAL_PORT": "3001",
+    "VERCEL_SERVICE_PROVIDER": "gmail",
+    "VERCEL_UPLOAD_DESTINATION_FOLDER": "uploads",
+    "VERCEL_TEMPLATES_DESTINATION_FOLDER": "templates",
+    "VERCEL_LOCAL_DOMAINE": "http://localhost:3000",
+    "VERCEL_DEPLOYED_DOMAINE": "https://internshipassignmentbackendserver.vercel.app"
+  }
+}
